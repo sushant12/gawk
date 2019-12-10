@@ -1,4 +1,4 @@
-defmodule GawkWeb.PageController do
+defmodule GawkWeb.ContestController do
   use GawkWeb, :controller
 
   def index(conn, _params) do

@@ -1,5 +1,6 @@
 defmodule GawkWeb.UserSocket do
   use Phoenix.Socket
+  channel "challenge:lobby", GawkWeb.ChallengeChannel
 
   ## Channels
   # channel "room:*", GawkWeb.RoomChannel

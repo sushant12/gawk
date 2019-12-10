@@ -16,7 +16,7 @@ defmodule GawkWeb.Router do
   scope "/", GawkWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", ContestController, :index
   end
 
   # Other scopes may use custom stacks.
