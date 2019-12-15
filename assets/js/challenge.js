@@ -6,7 +6,7 @@ let Challenge = {
   },
 
   listenForClick(channel) {
-    document.getElementById('test').addEventListener('click', (e) => {
+    document.getElementById('start').addEventListener('click', (e) => {
       e.preventDefault()
       channel.push('message', {body: 'hello world'})
     })

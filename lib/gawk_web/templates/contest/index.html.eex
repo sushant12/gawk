@@ -1,5 +1,6 @@
 <section class="row">
   <button id='start'>Start</button>
   <video id="local-video" autoplay playsinline></video>
+  <br>
   <video id="remote-video" autoplay playsinline></video>
 </section>

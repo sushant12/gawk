@@ -1,54 +1,28 @@
 let Call = {
   init() {
-    let mediaConstraints = {
-      video: true
-    }
-    let mylocalStream;
-
-    navigator.mediaDevices.getUserMedia(mediaConstraints)
-      .then(function(localStream) {
-        mylocalStream = localStream
-        document.getElementById('local-video').srcObject = localStream
-        // localStream.getTracks().forEach(track => myPeerConnection.addTrack(track, localStream))
-      })
-
+    const mediaConstraints = { video: true }
     const servers = {
       iceServer: [{
         urls: 'stun:stun.stunprotocol.org'
       }]
     }
-    debugger
-    let localPeerConnection = new RTCPeerConnection(servers)
-    let remotePeerConnection = new RTCPeerConnection(servers)
 
-    localPeerConnection.addEventListener('icecandidate', this.handleConnection);
-    localPeerConnection.addEventListener(
-    'iceconnectionstatechange', this.handleConnectionChange);
+    let peerConnection = new RTCPeerConnection(servers)
+    const localVideo = document.getElementById('local-video')
+    const remoteVideo = document.getElementById('remote-video')
+    let mylocalStream
 
-    remotePeerConnection.addEventListener('icecandidate', this.handleConnection);
-    remotePeerConnection.addEventListener(
-      'iceconnectionstatechange', this.handleConnectionChange);
-    remotePeerConnection.addEventListener('addstream', this.gotRemoteMediaStream);
+    peerConnection.ontrack = (event) => {
+      if (remoteVideo.srcObject) return;
+      debugger
+      remoteVideo.srcObject = event.streams[0];
+    }
 
-  // Add local stream to connection and create offer to connect.
-  localPeerConnection.addStream(mylocalStream);
-  localPeerConnection.createOffer({ offerToReceiveVideo: 1 })
-    .then(createdOffer)
-
-  },
-  createPeerConnection() {
-    debugger
-  },
-  handleNegotationNeededEvent(localPeerConnection) {
-    localPeerConnection.createOffer()
-      .then(offer => {
-        return localPeerConnection.setLocalDescription(offer)
-      })
-      .then(() => {
-        sendToServer({
-          type: 'video-offer',
-          sdp: localPeerConnection.localDescription
-        })
+    navigator.mediaDevices.getUserMedia(mediaConstraints)
+      .then(localStream => {
+        mylocalStream = localStream
+        localStream.getTracks().forEach( track => { peerConnection.addTrack(track, localStream) })
+        localVideo.srcObject = localStream
       })
   }
 }

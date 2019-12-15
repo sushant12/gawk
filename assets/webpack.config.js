@@ -13,6 +13,7 @@ module.exports = (env, options) => ({
     ]
   },
   entry: {
+    polyfill: 'babel-polyfill',
     './js/app.js': glob.sync('./vendor/**/*.js').concat(['./js/app.js'])
   },
   output: {

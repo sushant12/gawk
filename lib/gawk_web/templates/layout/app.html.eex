@@ -12,6 +12,18 @@
     <main role="main" class="container">
       <%= render @view_module, @view_template, assigns %>
     </main>
+    <script type="text/javascript" src="<%= Routes.static_path(@conn, "/images/webgazer.js") %>"></script>
     <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    <script type="text/javascript">
+      webgazer.setGazeListener(function(data, elapsedTime) {
+        if (data == null) {
+            return;
+        }
+        var xprediction = data.x; //these x coordinates are relative to the viewport
+        var yprediction = data.y; //these y coordinates are relative to the viewport
+        console.log(elapsedTime); //elapsed time is based on time since begin was called
+      }).begin();
+    
+    </script>
   </body>
 </html>
