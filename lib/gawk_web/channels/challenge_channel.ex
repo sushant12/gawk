@@ -1,7 +1,7 @@
 defmodule GawkWeb.ChallengeChannel do
   use GawkWeb, :channel
 
-  def join("challenge:lobby", _payload, socket) do
+  def join("challenge:" <> room_id, _payload, socket) do
     {:ok, socket}
   end
 
@@ -15,8 +15,8 @@ defmodule GawkWeb.ChallengeChannel do
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (challenge:lobby).
 
-  def handle_in("peer-message", %{"body" => body}, socket) do
-    broadcast_from!(socket, "peer-message", %{"body" => body})
+  def handle_in("peer-message", params, socket) do
+    broadcast_from!(socket, "peer-message", params)
     {:noreply, socket}
   end
 end
