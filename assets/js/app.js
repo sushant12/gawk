@@ -2,21 +2,10 @@
 // The MiniCssExtractPlugin is used to separate it out into
 // its own CSS file.
 import css from "../css/app.css"
-
-// webpack automatically bundles all modules in your
-// entry points. Those entry points can be configured
-// in "webpack.config.js".
-//
-// Import dependencies
-//
 import "phoenix_html"
 import Peer from "simple-peer"
-// Import local files
-//
-// Local files can be imported directly using relative paths, for example:
 import socket from "./socket"
-// import Challenge from "./challenge"
-// import Call from "./call"
+// import Contest from "./contest"
 
 const room_id = document.getElementById('arena').dataset.roomId
 let channel = socket.channel(`challenge:${room_id}`, {})
@@ -24,11 +13,16 @@ channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
 
+// document.getElementById('start').addEventListener("click", function() {
+//   let staringContest = Contest.init(socket)
+// })
+
 // get video/voice stream
 let peer;
 navigator.getUserMedia({ video: true}, gotMedia, () => {})
 
 function gotMedia (stream) {
+  // debuggers
   peer = new Peer({ 
     initiator: location.hash == "#init", 
     stream: stream,
@@ -47,7 +41,20 @@ function gotMedia (stream) {
     var remoteVideo = document.getElementById('remote-video')
     remoteVideo.srcObject = data
   })
+
+  peer.on('close', data => {
+    webgazer.end()
+  })
+
+  peer.on('error', err => {
+    webgazer.end()
+  })
+
+  peer.on('connect', (data) => {
+    webgazer.begin()
+  })
 }
+
 
 channel.on('peer-message', function(data) {
   peer.signal(JSON.parse(data.body))

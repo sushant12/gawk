@@ -8055,7 +8055,8 @@ var mosseFilterResponses = function() {
         }
 
         if (this.isBlink()) {
-          console.log("Nigga I blinked")
+          alert("You loose")
+          webgazer.end()
             eyesObj.left.blink = true;
             eyesObj.right.blink = true;
         }
