@@ -1,20 +1,23 @@
 # Gawk
 
-To start your Phoenix server:
+Gawk (verb): stare openly and stupidly.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+## History
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Back in 2014, when I was a novice programmer, I used to pirate a digital version of a magazine called WebDesigner. Each issues of the magazine would have couple of tutorials on web technologies. There was this one tutorial that caught my eye and is still stucked to me till this day.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+It was building a starting contest game with nodejs and trackingjs. Nodejs was THE technology back then and the tutorial was mainly trying to emphasize on its realtime features.
 
-## Learn more
+Fast forward to 2019, I took the challenge to build it.
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+## What is Gawk?
+
+Gawk is an online starting contest game.
+
+
+## Technologies
+
+- Phoenix (our server)
+- simple-peer (wrapper for webrtc)
+- Webgazerjs (for eye tracking)
+ 
