@@ -21,3 +21,8 @@ Gawk is an online starting contest game.
 - simple-peer (wrapper for webrtc)
 - Webgazerjs (for eye tracking)
  
+
+## Up and running
+
+- run `iex -S mix phx.server` from your project dir
+- in other tab, run `ngrok http 4000`
